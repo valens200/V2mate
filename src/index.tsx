@@ -10,6 +10,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+
+{/* <div className='w-[100%]  invisible realative'>
+                <p className='text-center my-4'>Share the video: </p>
+                <Shares />
+              </div> */}
     <Provider  store={store}>
       <App />
     </Provider>

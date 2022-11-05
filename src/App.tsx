@@ -13,9 +13,7 @@ const [cout , setCount ] = useState<String>("")
     <BrowserRouter >
     <Routes>
       <Route  path="/" element={<Home />}/>
-    </Routes>
-      
-            
+    </Routes>    
     </BrowserRouter>
   );
 }

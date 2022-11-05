@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { formReducer } from './features/formSclice'
 import { productReducer } from './features/productSlice'
+import { urlSlice } from './features/urlSlice'
 
 // ...
 
 export const store = configureStore({
   reducer: {
+    url:urlSlice,
     form:formReducer,
     product:productReducer
   }
