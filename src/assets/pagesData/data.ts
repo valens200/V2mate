@@ -52,4 +52,7 @@ export const  actions = [
   }
 ]
 
+export const videoData = ['Resolution', 'FileSize', ' Download']
+export const baseUrl = "http://localhost:5000";
+
 export const steps : string[] = [" Paste YouTube url or enter keywords into the search box.", " Choose output format, then click 'Download' button.", "Wait until the conversion is completed and download the file."]

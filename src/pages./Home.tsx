@@ -8,18 +8,40 @@ import { actions } from '../assets/pagesData/data'
 import Video from '../components/Video'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../store'
-
+import { setShowDownloadDiv } from '../features/urlSlice'
+import { baseUrl } from '../assets/pagesData/data'
 function Home(): JSX.Element {
+  const dispatch = useDispatch();
   const url = useSelector((store: RootState) => store.url.url);
-  const videoUrl =  "https://youtube.com/embed/" + url.substring(url.length - 11);
-  const showDownload = useSelector((store : RootState) => store.url.showDownload);
+  const videoUrl = "https://youtube.com/embed/" + url.substring(url.length - 11);
+  const videoData = useSelector((store : RootState) => store.url.videoData)
+  const showDownload = useSelector((store: RootState) => store.url.showDownload);
+  const downloadDiv = useSelector((store: RootState) => store.url.downloadDiv);
 
-  const getClass =  () : string => {
-    if(showDownload){
+  const getClass = (): string => {
+    if (downloadDiv) {
       return "g-white p-2 border  border-[grey] border-t-0 ";
-    }else{
+    } else {
       return "g-white p-2 border  border-[grey] border-t-0  invisible";
     }
+  }
+
+  const download = async() => {
+    // try {
+      await fetch(baseUrl +"/app/download?id=" + url.substring(24), {
+        method:"GET"
+      }).then( async(response) => {
+        console.log(await response.json());
+        console.log(response)
+      }).catch((error) => {
+        console.log(error);
+      })
+      
+    // } catch (error) {
+    //   console.log(error)
+      
+    // }
+
   }
   return (
     <div className=''>
@@ -30,17 +52,27 @@ function Home(): JSX.Element {
           </div>
           <div className='h-[100%]'>
             <Video />
-            <div  className='bg-white p-2 border  border-[grey] border-t-0 '>
+
+            {downloadDiv ? <div className='bg-white p-2 border  border-[grey] border-t-0 '>
               <div className='flex  border justify-center md:w-[80%] w-[100%] mx-auto  space-x-10'>
                 <iframe className='h-[30%] w-[50%]'
                   src={videoUrl}>
                 </iframe>
                 <div className='flex w-[50%] items-center'>
-                  <button className='bg-[green] text-white text-center md:w-[40%] w-[90%]  h-[25%] rounded font-bold'>Download</button>
+                  <div>
+                    {videoData.map((vid, index) => (
+                      <div key={index}>
+                        
+                      </div>
+                    ))}
+
+                  </div>
+                  <button onClick={() => download()} className='bg-[green] text-white text-center md:w-[40%] w-[90%]  h-[25%] rounded font-bold'>Download</button>
                 </div>
 
               </div>
-            </div>
+            </div> : null}
+
             <div className=' text-start md:text-center  flex flex-col space-y-8'>
               <h1 className='font-bold mb-4 mt-10 text-[1.9rem] '>Y2mate.com - YouTube Video Downloader</h1>
               <div className='mt-3  flex flex-col space-y-2'>
