@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { RootState } from '../store'
 import { setShowDownloadDiv } from '../features/urlSlice'
-
+import { setShowPortal } from '../features/urlSlice'
+import axios from 'axios'
 function Video(): JSX.Element {
     const [download, setDownload] = useState(false);
     const [downloadDiv, showDownloadDiv] = useState(false);
@@ -20,7 +21,6 @@ function Video(): JSX.Element {
         dispatch(setUrl({ type: "initialize", value: value }))
 
     }
-
     const getClass = (): string => {
         if (downloadDiv) {
             return "g-white p-2 border  border-[grey] border-t-0 ";
@@ -28,24 +28,21 @@ function Video(): JSX.Element {
             return "g-white p-2 border  border-[grey] border-t-0  invisible";
         }
     }
-
     const sendUrl = async () => {
         setDownload(true);
-        await fetch(`http://localhost:5000/app/url?id=${url.split("v=")[1]}`, {
-            method: "GET"
-        }).then(async (response) => {
+        await axios.get(`http://localhost:5000/app/url?id=${url.split("v=")[1]}`).then(async (response) => {
             if (response.status == 200) {
                 setTimeout(() => {
+                    dispatch(setShowPortal({type:true}))
                     setDownload(false);
                     showDownloadDiv(true);
                     dispatch(setShowDownloadDiv({ type: "show" }))
                 }, 3000)
-                console.log(await response.json());
+                dispatch(setUrl({type:'result', value:response.data.url}))
             }
         }).catch((error) => {
             console.log(error);
         })
-
     }
     return (
         <div className={download ? 'md:h-[46%] h-[47%]  border-b-0  text-black border border-[grey] bg-white text-white  mt-4 border p-6 flex items-center flex-col  space-y-10  w-[100%] mx-auto items-center' : 'md:h-[38%] h-[47%]  border-b-0  text-black border border-[grey] bg-white text-white  mt-4 border p-6 flex items-center flex-col  space-y-10  w-[100%] mx-auto items-center'} >

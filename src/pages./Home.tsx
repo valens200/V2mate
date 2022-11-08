@@ -10,11 +10,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../store'
 import { setShowDownloadDiv } from '../features/urlSlice'
 import { baseUrl } from '../assets/pagesData/data'
+import Url from '../components/Url'
+import axios from "axios"
+import { setShowPortal } from '../features/urlSlice'
 function Home(): JSX.Element {
   const dispatch = useDispatch();
   const url = useSelector((store: RootState) => store.url.url);
   const videoUrl = "https://youtube.com/embed/" + url.substring(url.length - 11);
-  const videoData = useSelector((store : RootState) => store.url.videoData)
+  const videoData = useSelector((store: RootState) => store.url.videoData)
   const showDownload = useSelector((store: RootState) => store.url.showDownload);
   const downloadDiv = useSelector((store: RootState) => store.url.downloadDiv);
 
@@ -26,21 +29,17 @@ function Home(): JSX.Element {
     }
   }
 
-  const download = async() => {
-    // try {
-      await fetch(baseUrl +"/app/download?id=" + url.substring(24), {
-        method:"GET"
-      }).then( async(response) => {
-        console.log(await response.json());
-        console.log(response)
+  const download = async () => {
+    try {
+      await axios.get(baseUrl + "/app/download?url=" + url).then((response) => {
+        console.log(response.data.url);
       }).catch((error) => {
-        console.log(error);
+        console.log(error)
       })
-      
-    // } catch (error) {
-    //   console.log(error)
-      
-    // }
+    } catch (error) {
+      console.log(error)
+
+    }
 
   }
   return (
@@ -50,6 +49,7 @@ function Home(): JSX.Element {
           <div className=''>
             <Navigation />
           </div>
+          <Url />
           <div className='h-[100%]'>
             <Video />
 
@@ -62,7 +62,7 @@ function Home(): JSX.Element {
                   <div>
                     {videoData.map((vid, index) => (
                       <div key={index}>
-                        
+
                       </div>
                     ))}
 

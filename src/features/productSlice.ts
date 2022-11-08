@@ -10,7 +10,6 @@ import span from "../assets/images/span.avif";
 interface CounterState {
   value: number;
 }
-
 const initialState = {
   value: 0,
   features: [

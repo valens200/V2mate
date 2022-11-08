@@ -15,20 +15,24 @@ const getUrl = (req: Request, res: Response) => {
   return res.status(200).json({
     success: true,
     message: "your url found ",
-    url: "https://youtube.com/embed/" + id,
+    url: "http://localhost:5000/app/download/v=https://youtube.com/embed/" + id,
   });
 };
 
 const download = async (req: Request, res: Response) => {
   try {
-    const id1 = req.query.id;
-    const url = "https://www.youtube.com/" + id1;
+    const url = req.query.url;
     res.header("Content-Disposition", 'attachment; filename="Video.mp4');
     ytdl(url).pipe(res);
-    console.log("urli ", url)
-    return res.status(200).json({ message: "video downloaded" });
+    console.log("urli ", url);
+    return res
+      .status(200)
+      .json({
+        message: "video downloaded",
+        url: "http://localhost:5000/app/download/v=" + url,
+      });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 

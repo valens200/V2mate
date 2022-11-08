@@ -1,58 +1,66 @@
-import { type } from "os"
-
+import { type } from "os";
 
 export const navData = [
   {
-    name:"Youtube Downloader",
-    link:""
+    name: "Youtube Downloader",
+    link: "",
   },
   {
-    name:"Youtube converter",
-    link:""
+    name: "Youtube converter",
+    link: "",
   },
   {
-    name:"Youtube to MP3 Converter"
-  }
+    name: "Youtube to MP3 Converter",
+  },
 ];
 
 export const shareSite = [
   {
-    name:"Facebook",
-    link:"/"
+    name: "Facebook",
+    link: "/",
   },
   {
-    name:"LinkedIn",
-    link:""
+    name: "LinkedIn",
+    link: "",
   },
   {
-    name:"Instagram",
-    link:""
+    name: "Instagram",
+    link: "",
   },
   {
-    name:"Twitter",
-    link:""
-  }
-]
-export const footerLInks : string[] = ["Github","LinkedIn", "Codeforces", "Leetcode"];
-export const  actions = [
+    name: "Twitter",
+    link: "",
+  },
+];
+export const footerLInks: string[] = [
+  "Github",
+  "LinkedIn",
+  "Codeforces",
+  "Leetcode",
+];
+export const actions = [
   {
-    name:"Free Download",
-    description1:"Unlimited conversion and free .",
-    description2:" download."
+    name: "Free Download",
+    description1: "Unlimited conversion and free .",
+    description2: " download.",
   },
   {
-    name:"Video & Audio",
-    description1:"Directly Download Video &",
-    description2:" Music."
+    name: "Video & Audio",
+    description1: "Directly Download Video &",
+    description2: " Music.",
   },
   {
-    name:"Easy Download",
-    description1:"Fully compatible with all",
-    description2:" browsers."
-  }
-]
+    name: "Easy Download",
+    description1: "Fully compatible with all",
+    description2: " browsers.",
+  },
+];
 
-export const videoData = ['Resolution', 'FileSize', ' Download']
+export const videoData = ["Resolution", "FileSize", " Download"];
 export const baseUrl = "http://localhost:5000";
 
-export const steps : string[] = [" Paste YouTube url or enter keywords into the search box.", " Choose output format, then click 'Download' button.", "Wait until the conversion is completed and download the file."]
+export const steps: string[] = [
+  " Paste YouTube url or enter keywords into the search box.",
+  " Choose output format, then click 'Download' button.",
+  "Wait until the conversion is completed and download the file.",
+];
